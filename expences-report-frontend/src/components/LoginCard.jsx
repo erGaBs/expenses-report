@@ -10,9 +10,12 @@ import {
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import authService from "../api/authService";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const LoginCard = () => {
 
+  const { setUser } = useContext(UserContext);
 const themeNeonYellow = createTheme({
   palette: {
     mode: "dark",
@@ -80,7 +83,8 @@ const themeNeonYellow = createTheme({
       try {
         const response = await authService.login(form);
         sessionStorage.setItem("user", JSON.stringify(response));
-        navigate("/dashboard");
+        setUser(response);
+        navigate("/");
 
   } catch (error) {
     console.error("Errore registrazione:", error.response?.data || error.message);

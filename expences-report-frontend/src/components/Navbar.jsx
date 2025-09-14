@@ -5,11 +5,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 import { grey, yellow } from '@mui/material/colors';
 import logo from '../assets/logo.png'; 
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
-export default function Navbar({ user }) {
+export default function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  user = JSON.parse(sessionStorage.getItem("user"));
+  const { user } = useContext(UserContext);
 
   const toggleDrawer = () => setDrawerOpen(!drawerOpen);
 
