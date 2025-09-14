@@ -30,6 +30,13 @@ public class AuthService {
         return jwtUtil.generateToken(user.getEmail());
     }
 
+    public String getNameByEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return user.getName();
+    }
+
     public User register(String name, String surname, String email,  String password) {
         if (userRepository.findByEmail(email).isPresent()) {
             throw new RuntimeException("email already exists");
