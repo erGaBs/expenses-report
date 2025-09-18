@@ -1,5 +1,6 @@
 package com.gabs.expences_report_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -13,7 +14,10 @@ public class Category {
 
     private String name;
 
+    private String type;
+
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Transaction> transactions;
 
     public Category() {}
@@ -44,5 +48,13 @@ public class Category {
 
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
